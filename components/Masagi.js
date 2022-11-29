@@ -1,7 +1,6 @@
 import {
   View,
   Text,
-  TextInput,
   TouchableOpacity,
   PermissionsAndroid,
   Image,
@@ -15,6 +14,8 @@ import ImageCropPicker from 'react-native-image-crop-picker';
 import ViewShot from 'react-native-view-shot';
 import { CameraRoll } from '@react-native-camera-roll/camera-roll';
 import Share from 'react-native-share';
+import SimpleForm from './pieces/SimpleForm';
+import PressForm from './pieces/PressForm';
 
 const Masagi = () => {
   const [pemateri, setPemateri] = useState('');
@@ -46,42 +47,68 @@ const Masagi = () => {
   };
 
   // save to camera roll
-  async function hasAndroidPermission() {
-    const permission = PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE;
+  // async function hasAndroidPermission() {
+  //   const permission = PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE;
 
-    const hasPermission = await PermissionsAndroid.check(permission);
-    if (hasPermission) {
-      return true;
-    }
+  //   const hasPermission = await PermissionsAndroid.check(permission);
+  //   if (hasPermission) {
+  //     return true;
+  //   }
 
-    const status = await PermissionsAndroid.request(permission);
-    return status === 'granted';
-  }
+  //   const status = await PermissionsAndroid.request(permission);
+  //   return status === 'granted';
+  // }
 
-  async function savePicture(uri) {
-    if (Platform.OS === 'android' && !(await hasAndroidPermission())) {
-      return;
-    }
-    CameraRoll.save(uri);
-    console.log('done');
-  }
+  // async function savePicture(uri) {
+  //   if (Platform.OS === 'android' && !(await hasAndroidPermission())) {
+  //     return;
+  //   }
+  //   CameraRoll.save(uri);
+  //   console.log('done');
+  // }
 
   // change img to svg
-  const handleSave = async () => {
-    let uri = await flyerRef.current.capture();
-    await savePicture(uri);
-  };
+  // const handleSave = async () => {
+  //   let uri = await flyerRef.current.capture();
+  //   await savePicture(uri);
+  // };
 
   // share functionality
   const handleShare = async () => {
     let uri = await flyerRef.current.capture();
     try {
       const shareResponse = await Share.open({
-        message: 'hello from masagi',
+        message: `
+        🔊🔊🔊🔊🔊🔊🔊🔊🔊🔊
+
+HADIRILAH
+
+📚 *MAGHRIB SABTU NGAJI (MASAGI)*
+
+🕋 MASJID AL-FIRDAUS PPI 259 FIRDAUS PANGALENGAN 🕌
+
+Bersama,
+👳🏻‍♀️ *${pemateri}*, 
+
+Berjudul,
+*_"${materi}"_*
+
+🗓️ *${hari},${tanggal} ${bulan} ${tahun}*
+
+🕕 *Pukul ${time}-Selesai WIB*
+
+🕌 *Bertempat di Masjid Al-Firdaus*
+
+_________
+😷 *_Terapkan Protokol Kesehatan_*
+
+📹Live streaming di FB Lensa Firdaus https://m.facebook.com/lensafirdaus259/
+
+#masagimasjidalfirdauspangalengan #masjidalfirdausppi259 #masjidalfirdauspangalengan #ppi259firdaus #rgugppi259 #syubbaanulfirdaus #lensafirdaus #blkppi259 #kopontrenppi259 #ayokemasjid #ayohijrahbersama #keluargabesarmasjidalfirdauspangalengan #keluargabesarpersispangalengan #tablighakbarmasjidalfirdaus #indonesia #quotes #sunnatanhasanatan #alquran #quran #hadis #hadits #alhadits #quransunnah #persis #ppi #masjid #mesjid #islam #muslim`,
         url: uri,
       });
     } catch (error) {
-      alert(error.message);
+      console.log(error.message);
     }
   };
 
@@ -119,156 +146,44 @@ const Masagi = () => {
       />
 
       {/* input */}
-      <View style={{ marginBottom: SIZES.radius }}>
-        <Text style={{ ...FONTS.h4, color: COLORS.white }}>Pemateri</Text>
-        <TextInput
-          style={{
-            backgroundColor: COLORS.secondary,
-            borderRadius: SIZES.padding,
-            paddingHorizontal: SIZES.padding,
-            marginTop: SIZES.base,
-            color: COLORS.white,
-          }}
-          onChangeText={(text) => setPemateri(text)}
-          value={pemateri}
-          placeholder="Masukan pemateri"
-          placeholderTextColor="#777"
-        />
-      </View>
+      <SimpleForm
+        label="Pemateri"
+        placeholder="Masukan pemateri"
+        value={pemateri}
+        setValue={setPemateri}
+      />
 
       {/* Materi */}
-      <View style={{ marginBottom: SIZES.radius }}>
-        <Text style={{ ...FONTS.h4, color: COLORS.white }}>Materi</Text>
-        <TextInput
-          style={{
-            backgroundColor: COLORS.secondary,
-            borderRadius: SIZES.padding,
-            paddingHorizontal: SIZES.padding,
-            marginTop: SIZES.base,
-            color: COLORS.white,
-          }}
-          maxLength={56}
-          onChangeText={(text) => setMateri(text)}
-          value={materi}
-          placeholder="Masukan materi"
-          placeholderTextColor="#777"
-        />
-      </View>
+      <SimpleForm
+        label="Materi"
+        placeholder="Masukan materi"
+        value={materi}
+        setValue={setMateri}
+      />
 
       {/* tanggal */}
-      <View style={{ marginBottom: SIZES.radius }}>
-        <Text style={{ ...FONTS.h4, color: COLORS.white }}>Tanggal</Text>
-        <TouchableOpacity
-          style={{
-            backgroundColor: COLORS.secondary,
-            borderRadius: SIZES.padding,
-            marginTop: SIZES.base,
-            flexDirection: 'row',
-          }}
-          onPress={() => setTanggalModal(true)}
-        >
-          <Text
-            style={{
-              ...FONTS.body3,
-              color: '#777',
-              marginHorizontal: SIZES.padding,
-              marginVertical: SIZES.radius,
-              flex: 1,
-            }}
-          >{`${tanggal}/${tahun}`}</Text>
-          <View
-            style={{
-              width: 50,
-              height: 50,
-              backgroundColor: COLORS.primary,
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderTopRightRadius: SIZES.radius,
-              borderBottomRightRadius: SIZES.radius,
-            }}
-          >
-            <Text style={{ ...FONTS.h4, color: COLORS.white }}>T</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
+      <PressForm
+        label="Tanggal"
+        textContent={`${tanggal}/${tahun}`}
+        onPress={() => setTanggalModal(true)}
+        logoButton="T"
+      />
 
       {/* waktu */}
-      <View style={{ marginBottom: SIZES.radius }}>
-        <Text style={{ ...FONTS.h4, color: COLORS.white }}>Waktu</Text>
-        <TouchableOpacity
-          style={{
-            backgroundColor: COLORS.secondary,
-            borderRadius: SIZES.padding,
-            marginTop: SIZES.base,
-            flexDirection: 'row',
-          }}
-          onPress={() => setTimeModal(true)}
-        >
-          <Text
-            style={{
-              ...FONTS.body3,
-              color: '#777',
-              marginHorizontal: SIZES.padding,
-              marginVertical: SIZES.radius,
-              flex: 1,
-            }}
-          >
-            {time}
-          </Text>
-          <View
-            style={{
-              width: 50,
-              height: 50,
-              backgroundColor: COLORS.primary,
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderTopRightRadius: SIZES.radius,
-              borderBottomRightRadius: SIZES.radius,
-            }}
-          >
-            <Text style={{ ...FONTS.h4, color: COLORS.white }}>T</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
+      <PressForm
+        label="Waktu"
+        textContent={time}
+        onPress={() => setTimeModal(true)}
+        logoButton="W"
+      />
 
       {/* get Photo */}
-      <View style={{ marginBottom: SIZES.radius }}>
-        <Text style={{ ...FONTS.h4, color: COLORS.white }}>Picture</Text>
-        <TouchableOpacity
-          style={{
-            backgroundColor: COLORS.secondary,
-            borderRadius: SIZES.padding,
-            marginTop: SIZES.base,
-            flexDirection: 'row',
-          }}
-          onPress={handleGetPicture}
-        >
-          <Text
-            style={{
-              ...FONTS.body3,
-              color: '#777',
-              marginHorizontal: SIZES.padding,
-              marginVertical: SIZES.radius,
-              flex: 1,
-            }}
-          >
-            url
-          </Text>
-          <View
-            style={{
-              width: 50,
-              height: 50,
-              backgroundColor: COLORS.primary,
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderTopRightRadius: SIZES.radius,
-              borderBottomRightRadius: SIZES.radius,
-            }}
-          >
-            <Text style={{ ...FONTS.h4, color: COLORS.white }}>C</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
+      <PressForm
+        label="Picture"
+        textContent={'url'}
+        onPress={handleGetPicture}
+        logoButton="C"
+      />
 
       {/* share button */}
       <View
@@ -279,7 +194,7 @@ const Masagi = () => {
           flexDirection: 'row',
         }}
       >
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={{
             paddingVertical: SIZES.base,
             paddingHorizontal: SIZES.padding,
@@ -292,7 +207,7 @@ const Masagi = () => {
           onPress={handleSave}
         >
           <Text style={{ ...FONTS.h4, color: COLORS.white }}>Save</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         <TouchableOpacity
           style={{
@@ -319,50 +234,75 @@ const Masagi = () => {
           format: 'png',
           quality: 1,
         }}
+        style={{
+          backgroundColor: 'gray',
+          width: SIZES.width - SIZES.padding * 2,
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginTop: SIZES.radius,
+          position: 'relative',
+          height: 311,
+        }}
       >
-        <View
+        <MasagiSvg
+          hari={hari}
+          tanggal={tanggal}
+          bulan={bulan}
+          tahun={tahun}
+          judul={materi}
+          pemateri={pemateri}
+          time={time}
+          picture={picture}
+          width="100%"
+          height="100%"
+        />
+
+        {/* PEMATERI */}
+        <Text
           style={{
-            width: SIZES.width - SIZES.padding * 2,
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginTop: SIZES.radius,
-            position: 'relative',
+            position: 'absolute',
+            left: 37,
+            bottom: 73,
+            fontSize: pemateri.length <= 30 ? 13 : 10,
+            fontWeight: '700',
+            lineHeight: 17,
+            color: '#1A6882',
+            backgroundColor: '#BBE2E2',
+            paddingVertical: 0.5,
+            paddingHorizontal: 8,
+            borderRadius: SIZES.padding,
+            borderTopLeftRadius: 0,
+            zIndex: 10,
+            minWidth: 150,
+            maxWidth: 240,
           }}
+          numberOfLines={1}
         >
-          <MasagiSvg
-            hari={hari}
-            tanggal={tanggal}
-            bulan={bulan}
-            tahun={tahun}
-            judul={materi}
-            pemateri={pemateri}
-            time={time}
-            picture={picture}
-            width="100%"
-            height="300"
-          />
-          {picture && (
-            <View
+          {pemateri}
+        </Text>
+
+        {/* picture */}
+        {picture && (
+          <View
+            style={{
+              width: 56.4,
+              height: 79.9,
+              position: 'absolute',
+              zIndex: -10,
+              top: 42.5,
+              right: 122,
+            }}
+          >
+            <Image
+              source={{ uri: picture }}
               style={{
-                width: 56.4,
-                height: 79.9,
-                position: 'absolute',
-                zIndex: -10,
-                top: 42,
-                right: 120,
+                width: '281%',
+                height: '281%',
               }}
-            >
-              <Image
-                source={{ uri: picture }}
-                style={{
-                  width: '270%',
-                  height: '270%',
-                }}
-                resizeMode="contain"
-              />
-            </View>
-          )}
-        </View>
+              resizeMode="contain"
+            />
+          </View>
+        )}
       </ViewShot>
     </View>
   );

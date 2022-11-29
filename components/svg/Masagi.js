@@ -15,7 +15,7 @@ const Masagi = ({
 }) => {
   let arrJudul = judul?.split(' ');
   let convertedJudul = [];
-  let maxWord = 12;
+  let maxWord = 20;
   let currentLine = 0;
   let titleFontSize = 52;
   let titleLineHeight = 58;
@@ -30,7 +30,6 @@ const Masagi = ({
     } else {
       if (convertedJudul[0]) {
         currentLine += 1;
-        maxWord += 2;
       }
 
       convertedJudul[currentLine] = arrJudul[i];
@@ -46,18 +45,14 @@ const Masagi = ({
       titleFontSize = 38;
       titleLineHeight = 38;
     }
+    if (convertedJudul.length >= 5) {
+      titleFontSize = 32;
+      titleLineHeight = 32;
+    }
   }
 
   return (
     <Svg viewBox="0 0 1000 1000" {...props}>
-      {/* <Image
-        overflow="visible"
-        width={'564px'}
-        height={'766px'}
-        transform="matrix(.9142 0 0 .8382 429.434 155.875)"
-        href={picture}
-        // preserveAspectRatio="none"
-      /> */}
       <Path
         fill="#BBE2E2"
         d="M0 0v1000h1000V0H0zm940.7 638.3c0 103.4-83.8 187.3-187.3 187.3H425.1V342.2c0-103.4 83.8-187.3 187.3-187.3h328.3v483.4z"
@@ -133,10 +128,10 @@ const Masagi = ({
         fill="#1A6882"
         d="M153 849.5v-8.2c0-3.6 2.9-6.6 6.6-6.6h7.4v14.8h-14z"
       />
-      <Path
+      {/* <Path
         fill="#BBE2E2"
         d="M743.7 752.3H149c-16.6 0-30-13.4-30-30v-30h624.7c16.6 0 30 13.4 30 30s-13.5 30-30 30z"
-      />
+      /> */}
       <Text
         transform="translate(432.658 68.756)"
         fill="#1A6882"
@@ -260,14 +255,14 @@ const Masagi = ({
       >
         {'LIVE STREAMING'}
       </Text>
-      <Text
+      {/* <Text
         transform="translate(146.82 737.578)"
         fill="#166E87"
         fontFamily="Roboto-Black"
-        fontSize={42}
+        fontSize={pemateri.length <= 25 ? 48 : 36}
       >
         {pemateri}
-      </Text>
+      </Text> */}
     </Svg>
   );
 };

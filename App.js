@@ -59,7 +59,10 @@ const App = () => {
                   padding: SIZES.base,
                   borderRadius: SIZES.base,
                 }}
-                onPress={() => setSelectedTemplate(el.id)}
+                onPress={() => {
+                  setSelectedTemplate(el.id);
+                  setShowSelectModal(false);
+                }}
               >
                 <View
                   style={{
@@ -78,13 +81,25 @@ const App = () => {
                   />
                 </View>
                 <Text style={{ flex: 1, ...FONTS.h4 }}>{el.name}</Text>
-                <Text style={{}}>{'>'}</Text>
               </TouchableOpacity>
             ))}
           </ScrollView>
         </View>
         <Pressable onPress={() => setShowSelectModal(false)}>
-          <Text style={{ ...FONTS.body4, color: 'white' }}>Hide modal</Text>
+          <Text
+            style={{
+              ...FONTS.body4,
+              color: 'white',
+              marginTop: SIZES.base,
+              backgroundColor: 'red',
+              paddingVertical: 2,
+              paddingHorizontal: SIZES.radius,
+              borderRadius: SIZES.radius,
+              fontWeight: 'bold',
+            }}
+          >
+            Cancel
+          </Text>
         </Pressable>
       </Modal>
 
@@ -97,7 +112,7 @@ const App = () => {
           marginVertical: SIZES.radius,
         }}
       >
-        BUAT CEPAT
+        LfLab
       </Text>
 
       <View
