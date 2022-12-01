@@ -4,15 +4,15 @@ import {
   ScrollView,
   TouchableOpacity,
   Pressable,
-  Image,
+  StatusBar,
+  Alert,
+  BackHandler,
 } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { COLORS, FONTS, SIZES } from './constants/theme';
 import Modal from 'react-native-modal';
 import { kajianTemplateList } from './constants/constants';
-import { Masagi } from './components';
-import MasagiV2 from './components/Masagiv2';
-import TablighAkbar from './components/TablighAkbar';
+import { Masagi, TablighAkbar } from './components';
 
 const App = () => {
   const [showSelectModal, setShowSelectModal] = useState(false);
@@ -21,7 +21,7 @@ const App = () => {
   let content = (
     <View>
       <Text style={{ ...FONTS.body3, color: 'white' }}>
-        Please select template
+        Pilih template terlebih dahulu
       </Text>
     </View>
   );
@@ -30,14 +30,36 @@ const App = () => {
     if (selectedTemplate === 'tk1') {
       content = <Masagi />;
     } else if (selectedTemplate === 'tk2') {
-      content = <MasagiV2 />;
-    } else if (selectedTemplate === 'tk3') {
       content = <TablighAkbar />;
     }
   }
 
+  useEffect(() => {
+    const backAction = () => {
+      Alert.alert('Tunggu dulu!', 'Tinggalkan Aplikasi?', [
+        {
+          text: 'TIDAK',
+          onPress: () => null,
+          style: 'cancel',
+        },
+        { text: 'IYA', onPress: () => BackHandler.exitApp() },
+      ]);
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction
+    );
+
+    return () => backHandler.remove();
+  }, []);
+
   return (
     <ScrollView style={{ backgroundColor: COLORS.bg, flex: 1 }}>
+      {/* status bar */}
+      <StatusBar animated={true} backgroundColor={COLORS.bg} />
+
       {/* Modal */}
       <Modal
         backdropColor="#00000090"
@@ -70,23 +92,9 @@ const App = () => {
                   setShowSelectModal(false);
                 }}
               >
-                <View
-                  style={{
-                    width: 80,
-                    height: 80,
-                    marginRight: SIZES.radius,
-                  }}
-                >
-                  <Image
-                    source={el.previewImage}
-                    resizeMode="cover"
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                    }}
-                  />
-                </View>
-                <Text style={{ flex: 1, ...FONTS.h4 }}>{el.name}</Text>
+                <Text style={{ flex: 1, ...FONTS.h4, textAlign: 'center' }}>
+                  {el.name}
+                </Text>
               </TouchableOpacity>
             ))}
           </ScrollView>

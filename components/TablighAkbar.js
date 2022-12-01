@@ -20,10 +20,7 @@ const TablighAkbar = () => {
   const [ahadKe, setAhadKe] = useState('');
   const [sebagai, setSebagai] = useState('');
   const [curLines, setCurlines] = useState(1);
-  const [materiFontOptions, setMateriFontOptions] = useState({
-    size: 11,
-    lineHeight: 14,
-  });
+  const [materiFontOptions, setMateriFontOptions] = useState({});
   const [sebagaiOffset, setSebagaiOffset] = useState(false);
 
   const [date, setDate] = useState(new Date());
@@ -44,16 +41,16 @@ const TablighAkbar = () => {
   useEffect(() => {
     if (curLines >= 4) {
       setMateriFontOptions({
-        size: 9,
-        lineHeight: 11,
+        size: 11,
+        lineHeight: 14,
       });
       return;
     }
 
     if (curLines === 1) {
       setMateriFontOptions({
-        size: 11,
-        lineHeight: 14,
+        size: 14.5,
+        lineHeight: 18,
       });
       return;
     }
@@ -296,10 +293,10 @@ const TablighAkbar = () => {
           style={{
             position: 'absolute',
             left: 15.4,
-            top: 40,
+            top: 38,
             zIndex: 10,
             width: 125,
-            height: 50,
+            height: 55,
             justifyContent: 'center',
             alignItems: 'center',
           }}
@@ -327,23 +324,24 @@ const TablighAkbar = () => {
             left: 20,
             top: sebagaiOffset ? 210 : 217,
             fontSize:
-              pemateri.length <= 30 ? 10 : pemateri.length <= 46 ? 9 : 7,
+              pemateri.length <= 30 ? 11 : pemateri.length <= 46 ? 10 : 8,
             fontFamily: 'MADETOMMY-Black',
             lineHeight: 12,
             color: '#466859',
             backgroundColor: '#ffd86b',
-            paddingVertical: pemateri.length <= 30 ? 2 : 2,
+            paddingVertical: pemateri.length <= 30 ? 3 : 2,
             paddingHorizontal: 8,
             borderRadius: SIZES.radius,
             borderTopLeftRadius: 0,
             borderBottomRightRadius: 0,
             zIndex: 10,
-            minWidth: 160,
-            maxWidth: 280,
+            minWidth: 140,
+            maxWidth: 260,
             opacity: 1,
             textDecorationLine: 'underline',
             textDecorationStyle: 'solid',
             textDecorationColor: '#466859',
+            textAlign: 'center',
           }}
           numberOfLines={1}
         >
@@ -373,7 +371,7 @@ const TablighAkbar = () => {
             }
           }}
         >
-          {`( ${sebagai} )`}
+          {sebagai && `( ${sebagai} )`}
         </Text>
 
         {/* picture */}

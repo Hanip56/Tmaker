@@ -13,15 +13,12 @@ import PressForm from './pieces/PressForm';
 // 1. setState - get which changeable
 // 2.
 
-const MasagiV2 = () => {
+const Masagiv2 = () => {
   const [pemateri, setPemateri] = useState('');
   const [materi, setMateri] = useState('');
   const [picture, setPicture] = useState('');
   const [curLines, setCurlines] = useState(1);
-  const [materiFontOptions, setMateriFontOptions] = useState({
-    size: 11,
-    lineHeight: 14,
-  });
+  const [materiFontOptions, setMateriFontOptions] = useState({});
 
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState('18.15');
@@ -39,16 +36,16 @@ const MasagiV2 = () => {
   useEffect(() => {
     if (curLines >= 4) {
       setMateriFontOptions({
-        size: 9,
-        lineHeight: 11,
+        size: 10,
+        lineHeight: 13,
       });
       return;
     }
 
     if (curLines === 1) {
       setMateriFontOptions({
-        size: 11,
-        lineHeight: 14,
+        size: 14,
+        lineHeight: 17,
       });
       return;
     }
@@ -87,7 +84,7 @@ Bersama,
 👳🏻‍♀️ *${pemateri}*, 
 
 Berjudul,
-*_"${materi}"_*
+*_"${materi.replace(/\s\s+/g, '')}"_*
 
 🗓️ *${hari},${tanggal} ${bulan} ${tahun}*
 
@@ -263,7 +260,7 @@ _________
           style={{
             position: 'absolute',
             left: 15.4,
-            top: 33,
+            top: 32,
             zIndex: 10,
             width: 125,
             height: 50,
@@ -275,7 +272,6 @@ _________
             style={{
               fontFamily: 'Mont-HeavyDEMO',
               fontSize: materiFontOptions.size,
-
               lineHeight: materiFontOptions.lineHeight,
               color: '#537F6F',
               width: '100%',
@@ -305,9 +301,10 @@ _________
             borderTopLeftRadius: 0,
             borderBottomRightRadius: 0,
             zIndex: 10,
-            minWidth: 160,
+            minWidth: 140,
             maxWidth: 280,
             opacity: 1,
+            textAlign: 'center',
           }}
           numberOfLines={1}
         >
@@ -341,4 +338,4 @@ _________
   );
 };
 
-export default MasagiV2;
+export default Masagiv2;
