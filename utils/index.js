@@ -21,5 +21,10 @@ export const getStringTanggal = (dateInput) => {
   const month = dateInput.getMonth();
   const year = dateInput.getFullYear();
 
-  return { hari: week[day], tanggal: date, bulan: months[month], tahun: year };
+  return {
+    hari: week[day].toUpperCase(),
+    tanggal: date,
+    bulan: months[month].toUpperCase(),
+    tahun: year,
+  };
 };

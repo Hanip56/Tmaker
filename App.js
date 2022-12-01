@@ -11,6 +11,8 @@ import { COLORS, FONTS, SIZES } from './constants/theme';
 import Modal from 'react-native-modal';
 import { kajianTemplateList } from './constants/constants';
 import { Masagi } from './components';
+import MasagiV2 from './components/Masagiv2';
+import TablighAkbar from './components/TablighAkbar';
 
 const App = () => {
   const [showSelectModal, setShowSelectModal] = useState(false);
@@ -27,6 +29,10 @@ const App = () => {
   if (selectedTemplate) {
     if (selectedTemplate === 'tk1') {
       content = <Masagi />;
+    } else if (selectedTemplate === 'tk2') {
+      content = <MasagiV2 />;
+    } else if (selectedTemplate === 'tk3') {
+      content = <TablighAkbar />;
     }
   }
 
@@ -91,7 +97,7 @@ const App = () => {
               ...FONTS.body4,
               color: 'white',
               marginTop: SIZES.base,
-              backgroundColor: 'red',
+              backgroundColor: '#d15555',
               paddingVertical: 2,
               paddingHorizontal: SIZES.radius,
               borderRadius: SIZES.radius,
@@ -137,7 +143,7 @@ const App = () => {
           <Text
             style={{ ...FONTS.body4, color: COLORS.white, textAlign: 'center' }}
           >
-            SELECT TEMPLATE
+            PILIH TEMPLATE
           </Text>
         </TouchableOpacity>
 

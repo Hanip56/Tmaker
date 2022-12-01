@@ -2,9 +2,15 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { COLORS, FONTS, SIZES } from '../../constants/theme';
 
-const PressForm = ({ label, onPress, textContent, logoButton }) => {
+const PressForm = ({
+  label,
+  onPress,
+  textContent,
+  logoButton,
+  containerStyle,
+}) => {
   return (
-    <View style={{ marginBottom: SIZES.radius }}>
+    <View style={{ marginBottom: SIZES.radius, ...containerStyle }}>
       <Text style={{ ...FONTS.h4, color: COLORS.white }}>{label}</Text>
       <TouchableOpacity
         style={{

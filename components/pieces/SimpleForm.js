@@ -2,7 +2,7 @@ import { View, Text, TextInput } from 'react-native';
 import React from 'react';
 import { COLORS, FONTS, SIZES } from '../../constants/theme';
 
-const SimpleForm = ({ value, setValue, placeholder, label }) => {
+const SimpleForm = ({ value, setValue, placeholder, label, ...props }) => {
   return (
     <View style={{ marginBottom: SIZES.radius }}>
       <Text style={{ ...FONTS.h4, color: COLORS.white }}>{label}</Text>
@@ -18,6 +18,7 @@ const SimpleForm = ({ value, setValue, placeholder, label }) => {
         value={value}
         placeholder={placeholder}
         placeholderTextColor="#777"
+        {...props}
       />
     </View>
   );

@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native';
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { COLORS, FONTS, SIZES } from '../constants/theme';
-import MasagiSvg from './svg/Masagi';
+import MasagiSvg from './svg/Masagi_v2';
 import DatePicker from 'react-native-date-picker';
 import { getStringTanggal } from '../utils';
 import ImageCropPicker from 'react-native-image-crop-picker';
@@ -13,10 +13,15 @@ import PressForm from './pieces/PressForm';
 // 1. setState - get which changeable
 // 2.
 
-const Masagi = () => {
+const MasagiV2 = () => {
   const [pemateri, setPemateri] = useState('');
   const [materi, setMateri] = useState('');
   const [picture, setPicture] = useState('');
+  const [curLines, setCurlines] = useState(1);
+  const [materiFontOptions, setMateriFontOptions] = useState({
+    size: 11,
+    lineHeight: 14,
+  });
 
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState('18.15');
@@ -25,16 +30,34 @@ const Masagi = () => {
 
   const { hari, tanggal, bulan, tahun } = getStringTanggal(date);
 
+  const flyerRef = useRef();
+
   const onTextLayout = useCallback((e) => {
-    console.log({ eventFromText: e.nativeEvent.lines.length });
+    setCurlines(e.nativeEvent.lines.length);
   }, []);
 
-  const flyerRef = useRef();
+  useEffect(() => {
+    if (curLines >= 4) {
+      setMateriFontOptions({
+        size: 9,
+        lineHeight: 11,
+      });
+      return;
+    }
+
+    if (curLines === 1) {
+      setMateriFontOptions({
+        size: 11,
+        lineHeight: 14,
+      });
+      return;
+    }
+  }, [curLines]);
 
   const handleGetPicture = () => {
     ImageCropPicker.openPicker({
-      width: 600,
-      height: 799,
+      width: 630,
+      height: 800,
       cropping: true,
     })
       .then((image) => {
@@ -88,6 +111,19 @@ _________
   return (
     // Pemateri
     <View style={{ flex: 1, width: '100%' }}>
+      {/* title */}
+      <Text
+        style={{
+          ...FONTS.h4,
+          color: COLORS.white,
+          textAlign: 'center',
+          textDecorationLine: 'underline',
+          marginBottom: SIZES.base,
+        }}
+      >
+        Masagi
+      </Text>
+
       {/* date modal */}
       <DatePicker
         modal
@@ -111,7 +147,17 @@ _________
         mode="time"
         onConfirm={(date) => {
           setTimeModal(false);
-          setTime(`${date.getHours()}.${date.getMinutes()}`);
+          setTime(
+            `${
+              date.getHours().toString().length < 2
+                ? `0${date.getHours()}`
+                : date.getHours()
+            }.${
+              date.getMinutes().toString().length < 2
+                ? `0${date.getMinutes()}`
+                : date.getMinutes()
+            }`
+          );
         }}
         onCancel={() => {
           setTimeModal(false);
@@ -203,39 +249,67 @@ _________
         }}
       >
         <MasagiSvg
-          hari={hari}
-          tanggal={tanggal}
-          bulan={bulan}
-          tahun={tahun}
-          judul={materi}
-          pemateri={pemateri}
-          time={time}
-          picture={picture}
           width="100%"
           height="100%"
+          hari={hari}
+          tanggal={tanggal}
+          time={time}
+          bulan={bulan}
+          tahun={tahun}
         />
+
+        {/* MATER */}
+        <View
+          style={{
+            position: 'absolute',
+            left: 15.4,
+            top: 33,
+            zIndex: 10,
+            width: 125,
+            height: 50,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Text
+            style={{
+              fontFamily: 'Mont-HeavyDEMO',
+              fontSize: materiFontOptions.size,
+
+              lineHeight: materiFontOptions.lineHeight,
+              color: '#537F6F',
+              width: '100%',
+            }}
+            onTextLayout={onTextLayout}
+            numberOfLines={curLines < 4 ? undefined : 4}
+          >
+            {materi}
+          </Text>
+        </View>
 
         {/* PEMATERI */}
         <Text
           style={{
             position: 'absolute',
-            left: 37,
+            left: 18,
             bottom: 73,
-            fontSize: pemateri.length <= 30 ? 13 : 10,
-            fontWeight: '700',
-            lineHeight: 17,
-            color: '#1A6882',
-            backgroundColor: '#BBE2E2',
-            paddingVertical: 0.5,
+            fontSize: pemateri.length <= 30 ? 11 : 9,
+            fontFamily: 'Mont-HeavyDEMO',
+            lineHeight: 12,
+            color: '#537f6f',
+            backgroundColor: '#ffd86b',
+            paddingVertical: pemateri.length <= 30 ? 1 : 2,
+            paddingTop: pemateri.length <= 30 ? 4 : 2,
             paddingHorizontal: 8,
-            borderRadius: SIZES.padding,
+            borderRadius: SIZES.radius,
             borderTopLeftRadius: 0,
+            borderBottomRightRadius: 0,
             zIndex: 10,
-            minWidth: 150,
-            maxWidth: 240,
+            minWidth: 160,
+            maxWidth: 280,
+            opacity: 1,
           }}
           numberOfLines={1}
-          onTextLayout={onTextLayout}
         >
           {pemateri}
         </Text>
@@ -244,21 +318,21 @@ _________
         {picture && (
           <View
             style={{
-              width: 56.4,
-              height: 79.9,
+              width: 63,
+              height: 80,
               position: 'absolute',
               zIndex: -10,
-              top: 42.5,
-              right: 122,
+              top: 60,
+              right: 107,
             }}
           >
             <Image
               source={{ uri: picture }}
               style={{
-                width: '281%',
-                height: '281%',
+                width: '250%',
+                height: '250%',
               }}
-              resizeMode="contain"
+              resizeMode="cover"
             />
           </View>
         )}
@@ -267,4 +341,4 @@ _________
   );
 };
 
-export default Masagi;
+export default MasagiV2;

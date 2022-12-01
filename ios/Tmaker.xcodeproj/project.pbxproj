@@ -30,6 +30,10 @@
 		2F06284340BB44EBB990C1D1 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9E5DAB3EA45C46B7BEA0B012 /* Roboto-Regular.ttf */; };
 		189AD733CC3D43BCB4F75AC3 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E476181B8154D2D89C074E2 /* Roboto-Thin.ttf */; };
 		50625ACE8B974CFD93209F09 /* Roboto-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DDB0D755E0FF40A4B299BFA3 /* Roboto-ThinItalic.ttf */; };
+		CCD59811992A4EFD91EFFB79 /* MADETOMMY-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F7116D287AA5467695BEE877 /* MADETOMMY-Black.otf */; };
+		415562AC0A1644088547D32B /* MADETOMMY-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 45DAC56365384C8FBF67E93A /* MADETOMMY-Bold.otf */; };
+		5357B102B775471596CBD1F6 /* MADETOMMY-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3697EA47CD2A4634B4F8219A /* MADETOMMY-Medium.otf */; };
+		13B2BA5767064C80ADD7BAAB /* Mont-HeavyDEMO.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5C5BDD9D795D498D8BD863E9 /* Mont-HeavyDEMO.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +80,10 @@
 		9E5DAB3EA45C46B7BEA0B012 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; name = "Roboto-Regular.ttf"; path = "../assets/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		8E476181B8154D2D89C074E2 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; name = "Roboto-Thin.ttf"; path = "../assets/fonts/Roboto-Thin.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		DDB0D755E0FF40A4B299BFA3 /* Roboto-ThinItalic.ttf */ = {isa = PBXFileReference; name = "Roboto-ThinItalic.ttf"; path = "../assets/fonts/Roboto-ThinItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F7116D287AA5467695BEE877 /* MADETOMMY-Black.otf */ = {isa = PBXFileReference; name = "MADETOMMY-Black.otf"; path = "../assets/fonts/MADETOMMY-Black.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		45DAC56365384C8FBF67E93A /* MADETOMMY-Bold.otf */ = {isa = PBXFileReference; name = "MADETOMMY-Bold.otf"; path = "../assets/fonts/MADETOMMY-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3697EA47CD2A4634B4F8219A /* MADETOMMY-Medium.otf */ = {isa = PBXFileReference; name = "MADETOMMY-Medium.otf"; path = "../assets/fonts/MADETOMMY-Medium.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		5C5BDD9D795D498D8BD863E9 /* Mont-HeavyDEMO.otf */ = {isa = PBXFileReference; name = "Mont-HeavyDEMO.otf"; path = "../assets/fonts/Mont-HeavyDEMO.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +208,10 @@
 				9E5DAB3EA45C46B7BEA0B012 /* Roboto-Regular.ttf */,
 				8E476181B8154D2D89C074E2 /* Roboto-Thin.ttf */,
 				DDB0D755E0FF40A4B299BFA3 /* Roboto-ThinItalic.ttf */,
+				F7116D287AA5467695BEE877 /* MADETOMMY-Black.otf */,
+				45DAC56365384C8FBF67E93A /* MADETOMMY-Bold.otf */,
+				3697EA47CD2A4634B4F8219A /* MADETOMMY-Medium.otf */,
+				5C5BDD9D795D498D8BD863E9 /* Mont-HeavyDEMO.otf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -317,6 +329,10 @@
 				2F06284340BB44EBB990C1D1 /* Roboto-Regular.ttf in Resources */,
 				189AD733CC3D43BCB4F75AC3 /* Roboto-Thin.ttf in Resources */,
 				50625ACE8B974CFD93209F09 /* Roboto-ThinItalic.ttf in Resources */,
+				CCD59811992A4EFD91EFFB79 /* MADETOMMY-Black.otf in Resources */,
+				415562AC0A1644088547D32B /* MADETOMMY-Bold.otf in Resources */,
+				5357B102B775471596CBD1F6 /* MADETOMMY-Medium.otf in Resources */,
+				13B2BA5767064C80ADD7BAAB /* Mont-HeavyDEMO.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
