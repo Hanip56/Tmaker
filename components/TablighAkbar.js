@@ -33,6 +33,11 @@ const TablighAkbar = () => {
   const { hari, tanggal, bulan, tahun } = getStringTanggal(date);
 
   const flyerRef = useRef();
+  const baseline = SIZES.width - SIZES.padding * 2;
+  const getRatio = (num) => {
+    const percentage = num * 0.3205128205128205;
+    return (percentage * baseline) / 100;
+  };
 
   const onTextLayout = useCallback((e) => {
     setCurlines(e.nativeEvent.lines.length);
@@ -41,16 +46,16 @@ const TablighAkbar = () => {
   useEffect(() => {
     if (curLines >= 4) {
       setMateriFontOptions({
-        size: 11,
-        lineHeight: 14,
+        size: getRatio(10),
+        lineHeight: getRatio(13),
       });
       return;
     }
 
     if (curLines === 1) {
       setMateriFontOptions({
-        size: 14.5,
-        lineHeight: 18,
+        size: getRatio(13.5),
+        lineHeight: getRatio(18),
       });
       return;
     }
@@ -82,6 +87,8 @@ const TablighAkbar = () => {
       console.log(error.message);
     }
   };
+
+  console.log({ sebagaiOffset });
 
   return (
     // Pemateri
@@ -268,12 +275,12 @@ const TablighAkbar = () => {
         }}
         style={{
           backgroundColor: 'gray',
-          width: SIZES.width - SIZES.padding * 2,
+          width: baseline,
           alignItems: 'center',
           justifyContent: 'center',
           marginTop: SIZES.radius,
           position: 'relative',
-          height: 440,
+          height: baseline + (baseline * 41.2) / 100,
         }}
       >
         <TablighAkbarSVG
@@ -287,16 +294,15 @@ const TablighAkbar = () => {
           tahun={tahun}
           ahadKe={ahadKe}
         />
-
         {/* MATER */}
         <View
           style={{
             position: 'absolute',
-            left: 15.4,
-            top: 38,
-            zIndex: 10,
-            width: 125,
-            height: 55,
+            left: getRatio(15.4),
+            top: getRatio(38),
+            zIndex: getRatio(10),
+            width: getRatio(125),
+            height: getRatio(55),
             justifyContent: 'center',
             alignItems: 'center',
           }}
@@ -316,27 +322,30 @@ const TablighAkbar = () => {
             {materi}
           </Text>
         </View>
-
         {/* PEMATERI */}
         <Text
           style={{
             position: 'absolute',
-            left: 20,
-            top: sebagaiOffset ? 210 : 217,
+            left: getRatio(20),
+            top: sebagaiOffset ? getRatio(214) : getRatio(226),
             fontSize:
-              pemateri.length <= 30 ? 11 : pemateri.length <= 46 ? 10 : 8,
+              pemateri.length <= 30
+                ? getRatio(10.5)
+                : pemateri.length <= 46
+                ? getRatio(9)
+                : getRatio(8),
             fontFamily: 'MADETOMMY-Black',
-            lineHeight: 12,
+            lineHeight: getRatio(12),
             color: '#466859',
             backgroundColor: '#ffd86b',
-            paddingVertical: pemateri.length <= 30 ? 3 : 2,
-            paddingHorizontal: 8,
-            borderRadius: SIZES.radius,
+            paddingVertical: pemateri.length <= 30 ? getRatio(3) : getRatio(2),
+            paddingHorizontal: getRatio(8),
+            borderRadius: getRatio(SIZES.radius),
             borderTopLeftRadius: 0,
             borderBottomRightRadius: 0,
             zIndex: 10,
-            minWidth: 140,
-            maxWidth: 260,
+            minWidth: getRatio(140),
+            maxWidth: getRatio(270),
             opacity: 1,
             textDecorationLine: 'underline',
             textDecorationStyle: 'solid',
@@ -347,24 +356,23 @@ const TablighAkbar = () => {
         >
           {pemateri}
         </Text>
-
         {/* Sebagai */}
         <Text
           style={{
             position: 'absolute',
-            left: 26,
-            top: sebagaiOffset ? 233 : 240,
-            fontSize: 5.2,
+            left: getRatio(26),
+            top: sebagaiOffset ? getRatio(238) : getRatio(245),
+            fontSize: getRatio(5.2),
             fontFamily: 'MADETOMMY-Bold',
-            lineHeight: 6.2,
+            lineHeight: getRatio(6.2),
             color: '#FFD051',
             zIndex: 10,
-            width: 110,
+            width: getRatio(110),
             opacity: 1,
           }}
           numberOfLines={3}
           onTextLayout={(e) => {
-            if (e.nativeEvent.lines.length === 3) {
+            if (e.nativeEvent.lines.length >= 3) {
               setSebagaiOffset(true);
             } else if (e.nativeEvent.lines.length <= 2) {
               setSebagaiOffset(false);
@@ -373,17 +381,16 @@ const TablighAkbar = () => {
         >
           {sebagai && `( ${sebagai} )`}
         </Text>
-
         {/* picture */}
         {picture && (
           <View
             style={{
-              width: 63,
-              height: 80,
+              width: getRatio(63),
+              height: getRatio(80),
               position: 'absolute',
               zIndex: -10,
-              top: 80,
-              right: 106,
+              top: getRatio(80),
+              right: getRatio(106),
             }}
           >
             <Image

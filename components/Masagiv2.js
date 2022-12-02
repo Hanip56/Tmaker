@@ -28,24 +28,39 @@ const Masagiv2 = () => {
   const { hari, tanggal, bulan, tahun } = getStringTanggal(date);
 
   const flyerRef = useRef();
+  const baseline = SIZES.width - SIZES.padding * 2;
+  const getRatio = (num) => {
+    const percentage = num * 0.3205128205128205;
+    return (percentage * baseline) / 100;
+  };
 
   const onTextLayout = useCallback((e) => {
     setCurlines(e.nativeEvent.lines.length);
   }, []);
 
+  console.log(`${8 / (baseline / 100)}%`);
+
+  // const getRatio = (num) => {
+  //   const baseNum = baseline / 100;
+  //   const percentage = num / baseNum;
+  //   return (percentage * baseline) / 100;
+  // };
+
+  console.log({ getRation: getRatio(8) });
+
   useEffect(() => {
     if (curLines >= 4) {
       setMateriFontOptions({
-        size: 10,
-        lineHeight: 13,
+        size: getRatio(8.5),
+        lineHeight: getRatio(11),
       });
       return;
     }
 
     if (curLines === 1) {
       setMateriFontOptions({
-        size: 14,
-        lineHeight: 17,
+        size: getRatio(13.5),
+        lineHeight: getRatio(17),
       });
       return;
     }
@@ -242,12 +257,12 @@ _________
           justifyContent: 'center',
           marginTop: SIZES.radius,
           position: 'relative',
-          height: 311,
+          height: SIZES.width - SIZES.padding * 2,
         }}
       >
         <MasagiSvg
-          width="100%"
-          height="100%"
+          width={'100%'}
+          height={'100%'}
           hari={hari}
           tanggal={tanggal}
           time={time}
@@ -259,11 +274,11 @@ _________
         <View
           style={{
             position: 'absolute',
-            left: 15.4,
-            top: 32,
+            left: '5%',
+            top: '10.4%',
             zIndex: 10,
-            width: 125,
-            height: 50,
+            width: '39.5%',
+            height: '16.5%',
             justifyContent: 'center',
             alignItems: 'center',
           }}
@@ -287,22 +302,22 @@ _________
         <Text
           style={{
             position: 'absolute',
-            left: 18,
-            bottom: 73,
-            fontSize: pemateri.length <= 30 ? 11 : 9,
+            left: '6%',
+            bottom: '23%',
+            fontSize: pemateri.length <= 30 ? getRatio(10.5) : getRatio(8.5),
             fontFamily: 'Mont-HeavyDEMO',
-            lineHeight: 12,
+            lineHeight: getRatio(12),
             color: '#537f6f',
             backgroundColor: '#ffd86b',
-            paddingVertical: pemateri.length <= 30 ? 1 : 2,
-            paddingTop: pemateri.length <= 30 ? 4 : 2,
-            paddingHorizontal: 8,
+            paddingVertical: pemateri.length <= 30 ? getRatio(1) : getRatio(2),
+            paddingTop: pemateri.length <= 30 ? getRatio(4) : getRatio(2),
+            paddingHorizontal: getRatio(8),
             borderRadius: SIZES.radius,
             borderTopLeftRadius: 0,
             borderBottomRightRadius: 0,
             zIndex: 10,
-            minWidth: 140,
-            maxWidth: 280,
+            minWidth: getRatio(140),
+            maxWidth: getRatio(280),
             opacity: 1,
             textAlign: 'center',
           }}
@@ -315,12 +330,12 @@ _________
         {picture && (
           <View
             style={{
-              width: 63,
-              height: 80,
+              width: getRatio(63),
+              height: getRatio(80),
               position: 'absolute',
               zIndex: -10,
-              top: 60,
-              right: 107,
+              top: getRatio(60),
+              right: getRatio(107),
             }}
           >
             <Image
