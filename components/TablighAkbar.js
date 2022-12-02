@@ -46,8 +46,8 @@ const TablighAkbar = () => {
   useEffect(() => {
     if (curLines >= 4) {
       setMateriFontOptions({
-        size: getRatio(10),
-        lineHeight: getRatio(13),
+        size: getRatio(9),
+        lineHeight: getRatio(12),
       });
       return;
     }
@@ -55,7 +55,7 @@ const TablighAkbar = () => {
     if (curLines === 1) {
       setMateriFontOptions({
         size: getRatio(13.5),
-        lineHeight: getRatio(18),
+        lineHeight: getRatio(17),
       });
       return;
     }
@@ -87,8 +87,6 @@ const TablighAkbar = () => {
       console.log(error.message);
     }
   };
-
-  console.log({ sebagaiOffset });
 
   return (
     // Pemateri
@@ -299,12 +297,13 @@ const TablighAkbar = () => {
           style={{
             position: 'absolute',
             left: getRatio(15.4),
-            top: getRatio(38),
+            top: getRatio(25),
             zIndex: getRatio(10),
             width: getRatio(125),
-            height: getRatio(55),
+            height: getRatio(80),
             justifyContent: 'center',
             alignItems: 'center',
+            // backgroundColor: 'white',
           }}
         >
           <Text
@@ -327,20 +326,20 @@ const TablighAkbar = () => {
           style={{
             position: 'absolute',
             left: getRatio(20),
-            top: sebagaiOffset ? getRatio(214) : getRatio(226),
+            top: sebagaiOffset ? getRatio(211) : getRatio(217),
             fontSize:
               pemateri.length <= 30
                 ? getRatio(10.5)
                 : pemateri.length <= 46
                 ? getRatio(9)
-                : getRatio(8),
+                : getRatio(7),
             fontFamily: 'MADETOMMY-Black',
             lineHeight: getRatio(12),
             color: '#466859',
             backgroundColor: '#ffd86b',
             paddingVertical: pemateri.length <= 30 ? getRatio(3) : getRatio(2),
             paddingHorizontal: getRatio(8),
-            borderRadius: getRatio(SIZES.radius),
+            borderRadius: getRatio(8),
             borderTopLeftRadius: 0,
             borderBottomRightRadius: 0,
             zIndex: 10,
@@ -361,7 +360,7 @@ const TablighAkbar = () => {
           style={{
             position: 'absolute',
             left: getRatio(26),
-            top: sebagaiOffset ? getRatio(238) : getRatio(245),
+            top: sebagaiOffset ? getRatio(234) : getRatio(240),
             fontSize: getRatio(5.2),
             fontFamily: 'MADETOMMY-Bold',
             lineHeight: getRatio(6.2),

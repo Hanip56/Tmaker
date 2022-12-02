@@ -38,21 +38,17 @@ const Masagiv2 = () => {
     setCurlines(e.nativeEvent.lines.length);
   }, []);
 
-  console.log(`${8 / (baseline / 100)}%`);
-
   // const getRatio = (num) => {
   //   const baseNum = baseline / 100;
   //   const percentage = num / baseNum;
   //   return (percentage * baseline) / 100;
   // };
 
-  console.log({ getRation: getRatio(8) });
-
   useEffect(() => {
     if (curLines >= 4) {
       setMateriFontOptions({
-        size: getRatio(8.5),
-        lineHeight: getRatio(11),
+        size: getRatio(8.8),
+        lineHeight: getRatio(10.9),
       });
       return;
     }
@@ -60,7 +56,7 @@ const Masagiv2 = () => {
     if (curLines === 1) {
       setMateriFontOptions({
         size: getRatio(13.5),
-        lineHeight: getRatio(17),
+        lineHeight: getRatio(16),
       });
       return;
     }
@@ -275,10 +271,10 @@ _________
           style={{
             position: 'absolute',
             left: '5%',
-            top: '10.4%',
+            top: '9%',
             zIndex: 10,
             width: '39.5%',
-            height: '16.5%',
+            height: '20%',
             justifyContent: 'center',
             alignItems: 'center',
           }}
