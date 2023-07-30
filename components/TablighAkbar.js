@@ -339,7 +339,7 @@ const TablighAkbar = () => {
             backgroundColor: '#ffd86b',
             paddingVertical: pemateri.length <= 30 ? getRatio(3) : getRatio(2),
             paddingHorizontal: getRatio(8),
-            borderRadius: getRatio(8),
+            borderRadius: getRatio(10),
             borderTopLeftRadius: 0,
             borderBottomRightRadius: 0,
             zIndex: 10,
